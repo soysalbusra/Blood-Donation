@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Volunteer Form</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: #fff7f7;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .form-container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+    h2 { color: #e43a47; margin-bottom: 20px; text-align: center; }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      background: #e43a47;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover { background: #c7333d; }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Volunteer Form</h2>
+    <input type="text" id="vname" placeholder="Full Name">
+    <input type="number" id="age" placeholder="Age">
+    <input type="text" id="vcontact" placeholder="Contact Number">
+    <textarea id="interest" placeholder="Your preferred tasks"></textarea>
+    <button onclick="saveVolunteer()">Submit</button>
+  </div>
+
+  <script>
+    function saveVolunteer() {
+      const name = document.getElementById('vname').value;
+      const age = document.getElementById('age').value;
+      const contact = document.getElementById('vcontact').value;
+      const interest = document.getElementById('interest').value;
+
+  
+      if (!name || !age || !contact || !interest) {
+        alert('Please fill out all the fields.');
+        return; 
+      }
+
+      
+      if (age < 18 || age > 100) {
+        alert('Please enter a valid age (between 18 and 100).');
+        return; 
+      }
+
+      
+      const contactRegex = /^\d{10}$/;
+      if (!contactRegex.test(contact)) {
+        alert('Please enter a valid contact number (10 digits).');
+        return; 
+      }
+
+      const data = { name, age, contact, interest };
+      localStorage.setItem('volunteerForm', JSON.stringify(data));
+      alert('Thanks for volunteering!');
+    }
+  </script>
+</body>
+</html>
